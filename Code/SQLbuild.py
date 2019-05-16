@@ -3,13 +3,44 @@ import pandas as pd
 
 conn = sqlite3.connect("db.sqlite")
 curs = conn.cursor()
-# curs.execute("DROP TABLE Year2015")
+curs.execute("DROP TABLE Year2015")
+curs.execute("DROP TABLE Year2016")
+curs.execute("DROP TABLE Year2017")
 # curs.execute("DROP TABLE pets")
 
-# load data
+### USED TO CREATE SQL TABLES
+
+# Load csv
 df2015 = pd.read_csv('../data/2015.csv')
 df2016 = pd.read_csv('../data/2016.csv')
 df2017 = pd.read_csv('../data/2017.csv')
+
+# Modify column names before import into SQLite
+df2015.rename(columns = {"Happines Rank": "HappyRank", 
+                        "Happiness Score":"HappyScore", 
+                        "Standard Error": "SoE",
+                        "Economy (GDP per Capita)": "Economy",
+                        "Health (Life Expectancy)": "Health",
+                        "Trust (Government Corruption)": "GovtTrust",
+                        "Dystopia Residual" : "Dystopia"}, inplace=True) 
+
+df2016.rename(columns = {"Happines Rank": "HappyRank", 
+                        "Happiness Score":"HappyScore",
+                        "Lower Confidence Interval" : "LowConfidence",
+                        "Upper Confidence Interval" : "UpCondfidence",
+                        "Economy (GDP per Capita)": "Economy",
+                        "Health (Life Expectancy)": "Health",
+                        "Trust (Government Corruption)": "GovtTrust",
+                        "Dystopia Residual" : "Dystopia"}, inplace=True) 
+
+df2017.rename(columns = {"Happiness.Rank": "HappyRank", 
+                        "Happiness.Score":"HappyScore",
+                        "Whisker.low" : "LowConfidence",
+                        "Whisker.high" : "UpCondfidence",
+                        "Economy..GDP.per.Capita.": "Economy",
+                        "Health..Life.Expectancy.": "Health",
+                        "Trust..Government.Corruption.": "GovtTrust",
+                        "Dystopia.Residual" : "Dystopia"}, inplace=True) 
 
 # strip whitespace from headers
 df2015.columns = df2015.columns.str.strip()
@@ -21,7 +52,6 @@ df2017.columns = df2017.columns.str.strip()
 df2015.to_sql("Year2015", conn)
 df2016.to_sql("Year2016", conn)
 df2017.to_sql("Year2017", conn)
-
 
 conn.close()
 
