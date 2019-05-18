@@ -6,6 +6,9 @@ curs = conn.cursor()
 curs.execute("DROP TABLE Year2015")
 curs.execute("DROP TABLE Year2016")
 curs.execute("DROP TABLE Year2017")
+curs.execute("DROP TABLE old_2015")
+curs.execute("DROP TABLE old_2016")
+curs.execute("DROP TABLE old_2017")
 # curs.execute("DROP TABLE pets")
 
 ### USED TO CREATE SQL TABLES
@@ -53,8 +56,68 @@ df2015.to_sql("Year2015", conn)
 df2016.to_sql("Year2016", conn)
 df2017.to_sql("Year2017", conn)
 
+# copy pd to sql table to a fresh table that declares a Primary Key
+curs.execute("PRAGMA foreign_keys=off;")
+curs.execute("BEGIN TRANSACTION;")
+# 2015
+curs.execute("ALTER TABLE Year2015 RENAME TO old_2015;")
+curs.execute("CREATE TABLE Year2015( \
+    ID_2015 INT PRIMARY KEY, \
+    Country TEXT, \
+    Region TEXT, \
+    HappyRank INTEGER, \
+    HappyScore REAL, \
+    SoE REAL, \
+    Economy REAL, \
+    Family REAL, \
+    Health REAL, \
+    Freedom REAL, \
+    GovtTrust REAl, \
+    Generosity REAL, \
+    Dystopia REAL);")
+curs.execute("INSERT INTO Year2015 SELECT * FROM old_2015;")
 
-curs.execute("ALTER TABLE Year2017 MODIFY COLUMN index DATATYPE primary key NOT NULL;")
+# 2016
+curs.execute("ALTER TABLE Year2016 RENAME TO old_2016;")
+curs.execute("CREATE TABLE Year2016( \
+    ID_2016 INT PRIMARY KEY, \
+    Country TEXT, \
+    Region TEXT, \
+    HappyRank INTEGER, \
+    HappyScore REAL, \
+    LowConfidence REAL, \
+    UpConfidence REAL, \
+    Economy REAL, \
+    Family REAL, \
+    Health REAL, \
+    Freedom REAL, \
+    GovtTrust REAl, \
+    Generosity REAL, \
+    Dystopia REAL);")
+curs.execute("INSERT INTO Year2016 SELECT * FROM old_2016;")
+# 2017
+curs.execute("ALTER TABLE Year2017 RENAME TO old_2017;")
+curs.execute("CREATE TABLE Year2017( \
+    ID_2017 INT PRIMARY KEY, \
+    Country TEXT, \
+    HappyRank INTEGER, \
+    HappyScore REAL, \
+    UpConfidence REAL, \
+    LowConfidence REAL, \
+    Economy REAL, \
+    Family REAL, \
+    Health REAL, \
+    Freedom REAL, \
+    GovtTrust REAl, \
+    Generosity REAL, \
+    Dystopia REAL);")
+curs.execute("INSERT INTO Year2017 SELECT * FROM old_2017;")
+# Clean up sqlite db, commit and close
+curs.execute("DROP TABLE old_2015")
+curs.execute("DROP TABLE old_2016")
+curs.execute("DROP TABLE old_2017")
+curs.execute("COMMIT;")
+curs.execute("PRAGMA foreign_keys=on;")
 
 conn.close()
 
