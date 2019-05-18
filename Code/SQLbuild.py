@@ -16,7 +16,7 @@ df2016 = pd.read_csv('../data/2016.csv')
 df2017 = pd.read_csv('../data/2017.csv')
 
 # Modify column names before import into SQLite
-df2015.rename(columns = {"Happines Rank": "HappyRank", 
+df2015.rename(columns = {"Happiness Rank": "HappyRank", 
                         "Happiness Score":"HappyScore", 
                         "Standard Error": "SoE",
                         "Economy (GDP per Capita)": "Economy",
@@ -24,7 +24,7 @@ df2015.rename(columns = {"Happines Rank": "HappyRank",
                         "Trust (Government Corruption)": "GovtTrust",
                         "Dystopia Residual" : "Dystopia"}, inplace=True) 
 
-df2016.rename(columns = {"Happines Rank": "HappyRank", 
+df2016.rename(columns = {"Happiness Rank": "HappyRank", 
                         "Happiness Score":"HappyScore",
                         "Lower Confidence Interval" : "LowConfidence",
                         "Upper Confidence Interval" : "UpCondfidence",
@@ -52,6 +52,9 @@ df2017.columns = df2017.columns.str.strip()
 df2015.to_sql("Year2015", conn)
 df2016.to_sql("Year2016", conn)
 df2017.to_sql("Year2017", conn)
+
+
+curs.execute("ALTER TABLE Year2017 MODIFY COLUMN index DATATYPE primary key NOT NULL;")
 
 conn.close()
 
