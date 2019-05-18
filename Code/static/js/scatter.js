@@ -1,6 +1,6 @@
 window.onload = function () {
  
-  var chart = new CanvasJS.Chart("#scatter-view", {
+  var chart = new CanvasJS.Chart("scatter-view", {
     animationEnabled: true,
     title:{
       text: "VARIABLE vs Happiness"
