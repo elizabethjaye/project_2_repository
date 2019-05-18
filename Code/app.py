@@ -47,75 +47,81 @@ def index():
     return render_template("index.html")
     
 
-@app.route("/api/2015")
-def api2015():
-    results = session.query(year2015).all()
-    return jsonify(results)
+@app.route("/api/2017")
+def api2017():
+    year2017 = Base.classes.Year2017
 
-    # hover_text = [result[0] for result in results]
-    # lat = [result[1] for result in results]
-    # lon = [result[2] for result in results]
+    results = session.query(year2017.ID_2017, year2017.Country, year2017.HappyRank, year2017.HappyScore, year2017.UpConfidence, \
+        year2017.LowConfidence, year2017.Economy, year2017.Family, year2017.Health, year2017.Freedom, year2017.GovtTrust, year2017.Generosity, \
+        year2017.Dystopia).all()
 
-    # pet_data = [{
-    #     "type": "scattergeo",
-    #     "locationmode": "USA-states",
-    #     "lat": lat,
-    #     "lon": lon,
-    #     "text": hover_text,
-    #     "hoverinfo": "text",
-    #     "marker": {
-    #         "size": 50,
-    #         "line": {
-    #             "color": "rgb(8,8,8)",
-    #             "width": 1
-    #         },
-    #     }
-    # }]
-    # return jsonify(results)
+    # Create a dictionary from the row data and append to a list of all_passengers
+    year = []
+    for ID_2017, Country, HappyRank, HappyScore, UpConfidence, LowConfidence, Economy, Family, Health, Freedom, GovtTrust, Generosity, \
+        Dystopia in results:
+        year2 = {}
+        year2["ID"] = ID_2017
+        year2["Country"] = Country
+        year2["Happiness Rank"] = HappyRank
+        year2["Happiness Score"] = HappyScore
+        year2["Upper Standard of Error"] = UpConfidence
+        year2["Lower Standard of Error"] = LowConfidence
+        year2["Economy"] = Economy
+        year2["Family"] = Family
+        year2["Health (Life Expectancy"] = Health
+        year2["Freedom"] = Freedom
+        year2["Trust in Government"] = GovtTrust
+        year2["Generosity"] = Generosity
+        year2["Dystopia Residual"] = Dystopia
 
-# @app.route("/API/2015")
-# def year2015():
-#     """Return a list of sample names."""
+        year.append(year2)
 
-#     # Use Pandas to perform the sql query
-#     stmt = db.session.query(+).statement
-#     df = pd.read_sql_query(stmt, db.session.bind)
-
-#     # Return a list of the column names (sample names)
-#     return jsonify(df)
+    return jsonify(year)
 
 
-# @app.route("/metadata/<input_val>")
-# def sample_metadata(input_val):
+@app.route("/api/<country_sel>")
+def countrySelection(country_sel):
 
-#     print(input_val)
+    year2017 = Base.classes.Year2017
 
-#     """Return the MetaData for a given sample."""
-#     sel = [
-#         Samples_Metadata.sample,
-#         Samples_Metadata.ETHNICITY,
-#         Samples_Metadata.GENDER,
-#         Samples_Metadata.AGE,
-#         Samples_Metadata.LOCATION,
-#         Samples_Metadata.BBTYPE,
-#         Samples_Metadata.WFREQ,
-#     ]
+    """Return the MetaData for a given sample."""
+    sel = [
+        year2017.ID_2017, 
+        year2017.Country, 
+        year2017.HappyRank, 
+        year2017.HappyScore, 
+        year2017.UpConfidence, 
+        year2017.LowConfidence, 
+        year2017.Economy, 
+        year2017.Family, 
+        year2017.Health, 
+        year2017.Freedom, 
+        year2017.GovtTrust, 
+        year2017.Generosity, 
+        year2017.Dystopia
+    ]
 
-#     results = db.session.query(*sel).filter(Samples_Metadata.sample == input_val).all()
+    results = session.query(*sel).filter(year2017.Country == country_sel).all()
 
-#     # Create a dictionary entry for each row of metadata information
-#     sample_metadata = {}
-#     for result in results:
-#         sample_metadata["sample"] = result[0]
-#         sample_metadata["ETHNICITY"] = result[1]
-#         sample_metadata["GENDER"] = result[2]
-#         sample_metadata["AGE"] = result[3]
-#         sample_metadata["LOCATION"] = result[4]
-#         sample_metadata["BBTYPE"] = result[5]
-#         sample_metadata["WFREQ"] = result[6]
+    # Create a dictionary entry for each row of metadata information
+    countryAPI = {}
+    for result in results:
 
-#     print(sample_metadata)
-#     return jsonify(sample_metadata)   
+        countryAPI["ID"] = result[0]
+        countryAPI["Country"] = result[1]
+        countryAPI["Happiness Rank"] = result[2]
+        countryAPI["Lower Standard of Error"] = result[5]
+        countryAPI["Economy"] = result[6]
+        countryAPI["Family"] = result[7]
+        countryAPI["Health (Life Expectancy"] = result[8]
+        countryAPI["Freedom"] = result[9]
+        countryAPI["Trust in Government"] = result[10]
+        countryAPI["Generosity"] = result[11]
+        countryAPI["Dystopia Residual"] = result[12]
+
+
+    print(countryAPI)
+    return jsonify(countryAPI)   
 
 
 # @app.route("/samples/<sample>")
