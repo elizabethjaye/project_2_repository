@@ -1,0 +1,12 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#heatmap {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 8px;
+  height: 400px;
+  width: 100%;
+}
