@@ -31,8 +31,19 @@ function chooseColor(borough) {
   }
 };
 
+// Colors
 
+var countryColor = {};
+d3.csv("../../Data/2017.csv", function (error, data) {
+  if (error) throw error;
+  console.log(data);
+  data.forEach(function (country) {
+    console.log(country["Country"]);
+    countryColor[country["Country"]] = country["Happiness.Score"]
+  })
+});
 
+console.log(countryColor);
 // Grabbing our GeoJSON data..
 d3.json("../../Data/world_polygons.json", function (data) {
   console.log(data);
