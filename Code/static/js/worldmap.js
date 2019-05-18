@@ -1,5 +1,5 @@
 // Creating map object
-var map = L.map("map", {
+var map = L.map("heatmap", {
   center: [40.7128, -74.0059],
   zoom: 2
 });
