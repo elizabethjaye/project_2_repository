@@ -15,7 +15,7 @@ from flask_sqlalchemy import SQLAlchemy
 #################################################
 # Database Setup 10-3-10
 #################################################
-engine = create_engine("sqlite:///db.sqlite")
+engine = create_engine("sqlite:///db.sqlite", connect_args={'check_same_thread': False}, echo=True)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 # db = SQLAlchemy(app)
 
@@ -49,7 +49,6 @@ def index():
 
 @app.route("/api/2017")
 def api2017():
-    year2017 = Base.classes.Year2017
 
     results = session.query(year2017.ID_2017, year2017.Country, year2017.HappyRank, year2017.HappyScore, year2017.UpConfidence, \
         year2017.LowConfidence, year2017.Economy, year2017.Family, year2017.Health, year2017.Freedom, year2017.GovtTrust, year2017.Generosity, \
@@ -81,8 +80,6 @@ def api2017():
 
 @app.route("/api/<country_sel>")
 def countrySelection(country_sel):
-
-    year2017 = Base.classes.Year2017
 
     """Return the MetaData for a given sample."""
     sel = [
