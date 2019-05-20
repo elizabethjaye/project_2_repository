@@ -3,10 +3,17 @@ body {
   margin: 0;
 }
 
+hr{
+	border-width: 6px;
+	color: black;
+	background-color: black;
+}
+
 #heatmap {
   position: relative;
   border: 1px solid black;
   border-radius: 8px;
-  height: 400px;
+  height: 600px;
   width: 100%;
 }
+
