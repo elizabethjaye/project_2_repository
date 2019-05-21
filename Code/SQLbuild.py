@@ -14,9 +14,9 @@ curs = conn.cursor()
 ### USED TO CREATE SQL TABLES
 
 # Load csv
-df2015 = pd.read_csv('../Data/2015.csv')
-df2016 = pd.read_csv('../Data/2016.csv')
-df2017 = pd.read_csv('../Data/2017.csv')
+df2015 = pd.read_csv('static/Data/2015.csv')
+df2016 = pd.read_csv('static/Data/2016.csv')
+df2017 = pd.read_csv('static/Data/2017.csv')
 
 # Modify column names before import into SQLite
 df2015.rename(columns = {"Happiness Rank": "HappyRank", 

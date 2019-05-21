@@ -1,3 +1,26 @@
+function perc2color(perc) {
+  var r, g, b = 0;
+  if(perc < 50) {
+    r = 255;
+    g = Math.round(5.1 * perc);
+  }
+  else {
+    g = 255;
+    r = Math.round(510 - 5.10 * perc);
+  }
+  var h = r * 0x10000 + g * 0x100 + b * 0x1;
+  return '#' + ('000000' + h.toString(16)).slice(-6);
+};
+
+// catch function
+function getSafe(fn, defaultVal) {
+  try {
+      return fn();
+  } catch (e) {
+      return defaultVal;
+  }
+}
+
 // Creating map object
 var map = L.map("heatmap", {
   center: [40.7128, -74.0059],
@@ -31,22 +54,53 @@ function chooseColor(borough) {
   }
 };
 
+
 // Colors
 
-var countryColor = {};
-d3.csv("../../Data/2017.csv", function (error, data) {
-  if (error) throw error;
-  console.log(data);
-  data.forEach(function (country) {
-    console.log(country["Country"]);
-    countryColor[country["Country"]] = country["Happiness.Score"]
-  })
-});
+function countryColor(country) {
+  // console.log(country);
 
-console.log(countryColor);
+  fetch(`api/2017/${country}`).then(function (response) {
+    console.log(response.status);
+    console.log(response.json());
+    if (response.status === 404) {
+      return "white"
+    } else {
+      console.log(response.json());
+      
+      color = perc2color(response["Happiness Score"]);
+      console.log(color);
+      return color
+    }
+
+  })
+
+    // d3.json(`api/2017/${country}`, function (data) {
+    //   console.log(data);
+      
+    //   color = perc2color(data["Happiness Score"]);
+    //   console.log(color);
+    //   return color
+    // })
+};
+
+// d3.json("api/2017", function (error, data) {
+
+//   if (error) throw error;
+//   console.log(data);
+//   data.forEach(function (country) {
+//     console.log(country["Country"]);
+//     countryColor[country["Country"]] = country["Happiness.Score"]
+//     console.log(country["Happiness Score"]);
+//     color = perc2color(country["Happiness Score"]);
+//   console.log(color)
+//   })
+
+
+
+// console.log(countryColor);
 // Grabbing our GeoJSON data..
-d3.json("../../Data/world_polygons.json", function (data) {
-  console.log(data);
+d3.json("static/Data/world_polygons.json", function (data) {
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(data, {
     // Style each feature (in this case a neighborhood)
@@ -54,7 +108,7 @@ d3.json("../../Data/world_polygons.json", function (data) {
       return {
         color: "white",
         // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
-        fillColor: chooseColor(feature.properties.name),
+        fillColor: countryColor(feature.properties.brk_name),
         fillOpacity: 0.5,
         weight: 1.5
       };
