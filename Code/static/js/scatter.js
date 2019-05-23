@@ -61,37 +61,61 @@
 //   }    
 
 
-function getData(){
-  var queryURL = "/api/2017";
-  d3.json(queryURL, function(data){
+// function getData(){
+//   var queryURL = "/api/2017";
+//   d3.json(queryURL, function(data){
 
-    var country = [],
-    happinessScore = [],
-    economy = [],
-    family = [],
-    freedom = [],
-    generosity = [],
-    lifeExpectancy = [];
+//     var country = [],
+//     happinessScore = [],
+//     economy = [],
+//     family = [],
+//     freedom = [],
+//     generosity = [],
+//     lifeExpectancy = [];
 
- for(i = 0; i < data.length; i++){
-    country.push(JSON.stringify(data[i]["Country"]));
+//  for(i = 0; i < data.length; i++){
+//     country.push(JSON.stringify(data[i]["Country"]));
 
-        happinessScore.push(parseFloat(JSON.stringify(data[i]["Happiness Score"])));
-        economy.push(parseFloat(JSON.stringify(data[i]["Economy"])));
-        family.push(parseFloat(JSON.stringify(data[i]["Family"])));
-        freedom.push(parseFloat(JSON.stringify(data[i]["Freedom"])));
-        generosity.push(parseFloat(JSON.stringify(data[i]["Generosity"])));
-        lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy)"])));
-};        
+//         happinessScore.push(parseFloat(JSON.stringify(data[i]["Happiness Score"])));
+//         economy.push(parseFloat(JSON.stringify(data[i]["Economy"])));
+//         family.push(parseFloat(JSON.stringify(data[i]["Family"])));
+//         freedom.push(parseFloat(JSON.stringify(data[i]["Freedom"])));
+//         generosity.push(parseFloat(JSON.stringify(data[i]["Generosity"])));
+//         lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy)"])));
+// };        
 
 
-  return country, happinessScore, economy, family, freedom, generosity, lifeExpectancy;
-        })
-    }
+//   return country, happinessScore, economy, family, freedom, generosity, lifeExpectancy;
+//         })
+//     }
+
+function getHappinessScore(){
+      var queryURL = "/api/2017";
+  return d3.json(queryURL, function(data){
+    happinessScore = [];
+
+    for(i = 0; i < data.length; i++){
+       happinessScore.push(parseFloat(data[i]["Happiness Score"]));
+     };
+
+console.log(happinessScore);
+
+return happinessScore;
+})
+
+
+}
 
   window.onload = function gdpAnalysis () {
 
- console.log(happinessScore);
+happyScore = getHappinessScore();
+
+
+    var queryURL = "/api/2017";
+
+    d3.json(queryURL, function(data){
+
+ 
   var chart = new CanvasJS.Chart("scatter-view", {
     animationEnabled: true,
     title:{
@@ -105,15 +129,21 @@ function getData(){
     },
 
     data:
-        [{type: "scatter",
-        toolTipContent: "<span style=\"color:#4F81BC \"><b>{country}</b></span><br/><b> Happiness Score:</b> {x} <br/><b>GDP Per Capita:</b></span> {y}",
+        [
+
+        {type: "scatter",
         name: "Country",
         showInLegend: true,
         dataPoints: [
-          {x: happinessScore, y: economy}]
-        }] 
+          {x: parseFloat(data[i]["Happiness Score"]), y: parseFloat(data[i]["Economy"])
+
+        }
+
+          ]
+
+
   
   });
   chart.render();
-   
+   });
   }                              
