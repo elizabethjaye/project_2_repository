@@ -3,20 +3,20 @@ import pandas as pd
 
 conn = sqlite3.connect("db.sqlite")
 curs = conn.cursor()
-curs.execute("DROP TABLE Year2015")
-curs.execute("DROP TABLE Year2016")
-curs.execute("DROP TABLE Year2017")
-curs.execute("DROP TABLE old_2015")
-curs.execute("DROP TABLE old_2016")
-curs.execute("DROP TABLE old_2017")
+# curs.execute("DROP TABLE Year2015")
+# curs.execute("DROP TABLE Year2016")
+# curs.execute("DROP TABLE Year2017")
+# curs.execute("DROP TABLE old_2015")
+# curs.execute("DROP TABLE old_2016")
+# curs.execute("DROP TABLE old_2017")
 # curs.execute("DROP TABLE pets")
 
 ### USED TO CREATE SQL TABLES
 
 # Load csv
-df2015 = pd.read_csv('../data/2015.csv')
-df2016 = pd.read_csv('../data/2016.csv')
-df2017 = pd.read_csv('../data/2017.csv')
+df2015 = pd.read_csv('static/Data/2015.csv')
+df2016 = pd.read_csv('static/Data/2016.csv')
+df2017 = pd.read_csv('static/Data/2017.csv')
 
 # Modify column names before import into SQLite
 df2015.rename(columns = {"Happiness Rank": "HappyRank", 

@@ -17,6 +17,7 @@ hr{
   width: 100%;
 }
 
+<<<<<<< HEAD
 /*!
  * Start Bootstrap - One Page Wonder v5.0.4 (https://startbootstrap.com/template-overviews/one-page-wonder)
  * Copyright 2013-2019 Start Bootstrap
@@ -181,3 +182,16 @@ header.masthead .bg-circle-4 {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
   box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
 }
+=======
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+>>>>>>> 9b725a807c0e9986ad5d7b55a5c2e98720b4c124

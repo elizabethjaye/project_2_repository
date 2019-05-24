@@ -110,6 +110,8 @@ def countrySelection(country_sel):
         countryAPI["ID"] = result[0]
         countryAPI["Country"] = result[1]
         countryAPI["Happiness Rank"] = result[2]
+        countryAPI["Happiness Score"] = result[3]
+        countryAPI["Upper Standard of Error"] = result[4]
         countryAPI["Lower Standard of Error"] = result[5]
         countryAPI["Economy"] = result[6]
         countryAPI["Family"] = result[7]
@@ -123,6 +125,12 @@ def countrySelection(country_sel):
     print(countryAPI)
     return jsonify(countryAPI)   
 
+@app.errorhandler(404)
+def custom400(error):
+    response = jsonify({"Country": "white"})
+
+
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
