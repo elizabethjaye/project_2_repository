@@ -1,10 +1,10 @@
 function perc2color(perc) {
   var r, g, b = 0;
-  if(perc < 50) {
+  if (perc < 50) {
     r = 255;
     g = Math.round(5.1 * perc);
-  }
-  else {
+
+  } else {
     g = 255;
     r = Math.round(510 - 5.10 * perc);
   }
@@ -12,14 +12,6 @@ function perc2color(perc) {
   return '#' + ('000000' + h.toString(16)).slice(-6);
 };
 
-// catch function
-function getSafe(fn, defaultVal) {
-  try {
-      return fn();
-  } catch (e) {
-      return defaultVal;
-  }
-}
 
 // Creating map object
 var map = L.map("heatmap", {
@@ -35,80 +27,95 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(map);
 
-
-// Function that will determine the color of a neighborhood based on the borough it belongs to
-function chooseColor(borough) {
-  switch (borough) {
-  case "Brooklyn":
-    return "yellow";
-  case "Bronx":
-    return "red";
-  case "Manhattan":
-    return "orange";
-  case "Queens":
-    return "green";
-  case "Staten Island":
-    return "purple";
-  default:
-    return "black";
-  }
-};
+// Legend creating and implementation
 
 
-// Colors
 
-function countryColor(country) {
-  // console.log(country);
+var legend = L.control({position: 'bottomright'});
 
-  fetch(`api/2017/${country}`).then(function (response) {
-    console.log(response.status);
-    console.log(response.json());
-    if (response.status === 404) {
-      return "white"
-    } else {
-      console.log(response.json());
-      
-      color = perc2color(response["Happiness Score"]);
-      console.log(color);
-      return color
+legend.onAdd = function (map) {
+
+  var div = L.DomUtil.create('div', 'info legend'),
+    grades = [2, 3, 4, 5, 6],
+    labels = [];
+  for (var x = 3; x < 8; x++){
+    labels.push(((x - 2.69) / (7.54 - 2.69)) * 100  )
+  };
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+  for (var i = 0; i < labels.length; i++) {
+        div.innerHTML +=
+            // '<i style="background:' + perc2color((grades[i] + 1)/8* 100) + '"></i> ' +
+            '<i style="background:' + perc2color(labels[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
-  })
-
-    // d3.json(`api/2017/${country}`, function (data) {
-    //   console.log(data);
-      
-    //   color = perc2color(data["Happiness Score"]);
-    //   console.log(color);
-    //   return color
-    // })
+    return div;
 };
 
-// d3.json("api/2017", function (error, data) {
-
-//   if (error) throw error;
-//   console.log(data);
-//   data.forEach(function (country) {
-//     console.log(country["Country"]);
-//     countryColor[country["Country"]] = country["Happiness.Score"]
-//     console.log(country["Happiness Score"]);
-//     color = perc2color(country["Happiness Score"]);
-//   console.log(color)
-//   })
-
-
-
+legend.addTo(map);
 // console.log(countryColor);
 // Grabbing our GeoJSON data..
-d3.json("static/Data/world_polygons.json", function (data) {
+d3.json(`api/2017`, function (apidata) {
+
+  d3.json("static/Data/world_polygons.json", function (data) {
+    
+//colors for the countries based on value
+
+    function countryColor(country) {
+      // console.log(country)
+      let hColor = "blue";
+      // console.log(country);
+     // apidata.forEach(function (row) {
+        // console.log(row["Country"]);
+        // console.log(country);
+      for (var i = 0; i < apidata.length; i++){
+        // console.log(apidata[i]["Country"]);
+        if (apidata[i]["Country"] === country) {
+          console.log(apidata[i]["Country"]);
+          let per = ((apidata[i]["Happiness Score"]-2.69)/(7.54-2.69))*100;
+          // let per = Math.round(((apidata[i]["Happiness Score"] - 2) / 6) * 100);
+          hColor = perc2color(per);
+          console.log(per);
+          console.log(hColor);
+          return hColor;
+        } else {
+          hColor = "grey";
+          
+        };
+      };
+      
+      return hColor;
+      
+    };
+
+    function countryHappiness(country) {
+      let happinessScore = "Not Available";
+      for (var i = 0; i < apidata.length; i++){
+        // console.log(apidata[i]["Country"]);
+        if (apidata[i]["Country"] === country) {
+          happinessScore = (apidata[i]["Happiness Score"]);
+          // console.log(happinessScore);
+          return happinessScore.toFixed(2);
+        } else {
+          happinessScore = "Not Available";
+        };
+      };
+      return happinessScore; 
+    };
+
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(data, {
     // Style each feature (in this case a neighborhood)
-    style: function(feature) {
+    style: function (feature) {
+      // console.log(feature.properties.name);
+      let maxColor = countryColor(feature.properties.name);
+      // console.log(countryColor(feature.properties.name));
+      // console.log(maxColor);
       return {
-        color: "white",
+        color: countryColor(feature.properties.name),
         // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
-        fillColor: countryColor(feature.properties.brk_name),
+        fillColor: countryColor(feature.properties.name),
         fillOpacity: 0.5,
         weight: 1.5
       };
@@ -137,8 +144,10 @@ d3.json("static/Data/world_polygons.json", function (data) {
         }
       });
       // Giving each feature a pop-up with information pertinent to it
-      layer.bindPopup("<h1>" + feature.properties.name + "</h1> <hr> <h2>" + feature.properties.region_un + "</h2>");
+      layer.bindPopup("<h1>" +"Country: "+ feature.properties.name + "</h1>" + "<h1>" +"Happiness Score: "+ countryHappiness(feature.properties.name) + "</h1> <hr> <h2>" + "Region: "+feature.properties.region_un + "</h2>");
+
 
     }
   }).addTo(map);
+});
 });
