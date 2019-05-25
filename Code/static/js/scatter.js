@@ -1,349 +1,240 @@
-// window.onload = function () {
-
-//   var chart = new CanvasJS.Chart("scatter-view", {
-//     animationEnabled: true,
-//     title:{
-//       text: "VARIABLE vs Happiness"
-//     },
-//     axisX: {
-//       title:"Server Load (in TPS)"
-//     },
-//     axisY:{
-//       title: "Response Time (in ms)"
-//     },
-//     data: [{
-//       type: "scatter",
-//       toolTipContent: "<span style=\"color:#4F81BC \"><b>COUNTRY</b></span><br/><b> Happiness:</b> {x} TPS<br/><b>VARIABLE:</b></span> {y} ms",
-//       name: "REGION1",
-//       showInLegend: true,
-//       dataPoFloats: [
-//         { x: 23, y: 330 },
-//         { x: 28, y: 390 },
-//         { x: 39, y: 400 },
-//         { x: 34, y: 430 },
-//         { x: 24, y: 321 },
-//         { x: 29, y: 250 },
-//         { x: 29, y: 370 },
-//         { x: 23, y: 290 },
-//         { x: 27, y: 250 },
-//         { x: 34, y: 380 },
-//         { x: 36, y: 320 },
-//         { x: 33, y: 405 },
-//         { x: 32, y: 453 },
-//         { x: 21, y: 292 }
-//       ]
-//     },
-//     {
-//       type: "scatter",
-//       name: "REGION 2",
-//       showInLegend: true, 
-//       toolTipContent: "<span style=\"color:#C0504E \"><b>COUNTRY</b></span><br/><b> Happiness:</b> {x} TPS<br/><b> VARIABLE:</b></span> {y} ms",
-//       dataPoFloats: [
-//         { x: 19, y: 200 },
-//         { x: 27, y: 300 },
-//         { x: 35, y: 330 },
-//         { x: 32, y: 190 },
-//         { x: 29, y: 189 },
-//         { x: 22, y: 150 },
-//         { x: 27, y: 200 },
-//         { x: 26, y: 190 },
-//         { x: 24, y: 225 },
-//         { x: 33, y: 330 },
-//         { x: 34, y: 250 },
-//         { x: 30, y: 120 },
-//         { x: 37, y: 153 },
-//         { x: 24, y: 196 }
-//       ]
-//     }]
-//   });
-//   chart.render();
-
-//   }    
-
-
-// function getData(){
-//   var queryURL = "/api/2017";
-//   d3.json(queryURL, function(data){
-
-//     var country = [],
-//     happinessScore = [],
-//     economy = [],
-//     family = [],
-//     freedom = [],
-//     generosity = [],
-//     lifeExpectancy = [];
-
-//  for(i = 0; i < data.length; i++){
-//     country.push(JSON.stringify(data[i]["Country"]));
-
-//         happinessScore.push(parseFloat(JSON.stringify(data[i]["Happiness Score"])));
-//         economy.push(parseFloat(JSON.stringify(data[i]["Economy"])));
-//         family.push(parseFloat(JSON.stringify(data[i]["Family"])));
-//         freedom.push(parseFloat(JSON.stringify(data[i]["Freedom"])));
-//         generosity.push(parseFloat(JSON.stringify(data[i]["Generosity"])));
-//         lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy)"])));
-// };        
-
-
-//   return country, happinessScore, economy, family, freedom, generosity, lifeExpectancy;
-//         })
-//     }
-
-// function getHappinessScore() {
-//   var queryURL = "/api/2017";
-//   return d3.json(queryURL, function(data) {
-//     var happinessScore = [];
-
-//     for (i = 0; i < data.length; i++) {
-//       happinessScore.push(parseFloat(data[i]["Happiness Score"]));
-//     };
-
-//     console.log(happinessScore);
-
-//     return happinessScore;
-//   })
-
-
-// }
-
-// function getCountry() {
-//   var queryURL = "/api/2017";
-//   return d3.json(queryURL, function(data) {
-//     var countries = [];
-
-//     for (i = 0; i < data.length; i++) {
-//       countries.push(parseFloat(data[i]["Country"]));
-//     };
-
-//     return countries;
-//   })
-
-
-// }
-
-// function getEconomy() {
-//   var queryURL = "/api/2017";
-//   return d3.json(queryURL, function(data) {
-//     var economies = [];
-
-//     for (i = 0; i < data.length; i++) {
-//       economies.push(parseFloat(data[i]["Economy"]));
-//     };
-
-//     return economies;
-//   })
-
-
-// }
-
 //declare arrays
 
 var country = [],
-  happinessScore = [],
-  economy = [],
-  family = [],
-  freedom = [],
-  generosity = [],
-  lifeExpectancy = [];
+	happinessScore = [],
+	economy = [],
+	family = [],
+	freedom = [],
+	generosity = [],
+	govtTrust = [],
+	lifeExpectancy = [];
 
 //declare access url
 var queryURL = "/api/2017";
 
 window.onload = function getData() {
 
-  Promise.all(
+	Promise.all(
 
-    [
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          country.push(data[i]["Country"]);
-        }
-        console.log(country);
-      }),
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          happinessScore.push(parseFloat(data[i]["Happiness Score"]));
+		[
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					country.push(data[i]["Country"]);
+				}
+				console.log(country);
+			}),
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					happinessScore.push(parseFloat(data[i]["Happiness Score"]));
 
-        }
-        console.log(happinessScore);
-      }),
+				}
+				console.log(happinessScore);
+			}),
 
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          economy.push(parseFloat(data[i]["Economy"]));
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					economy.push(parseFloat(data[i]["Economy"]));
 
-        }
-        console.log(economy);
-      }),
-
-
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          family.push(parseFloat(JSON.stringify(data[i]["Family"])));
-        }
-        console.log(family);
-
-      }),
-
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          freedom.push(parseFloat(JSON.stringify(data[i]["Freedom"])));
-        }
-        console.log(freedom);
-      }),
-
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          generosity.push(parseFloat(JSON.stringify(data[i]["Generosity"])));
-        }
-        console.log(generosity);
-      }),
-      d3.json(queryURL, function(data) {
-        for (i = 0; i < data.length; i++) {
-          lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy)"])));
-        }
-      })
-
-    ]
-
-  ).then(function(data) {
-    //potentially leave this to not happen, confirm
-    chart = new CanvasJS.Chart("scatter-view", {
-        animationEnabled: true,
-        title: {
-          text: "GDP Per Capita vs Happiness"
-        },
-        axisX: {
-          title: "Happiness"
-        },
-        axisY: {
-          title: "GDP Per Capita"
-        },
-
-        data: [
-
-          {
-            type: "scatter",
-            name: "Country",
-            showInLegend: true,
-            dataPoints: happinessScore.map(function(elt, index) {
-              return {
-                x: elt,
-                y: economy[index]
-              }
-            })
-
-          }
-        ]
-
-      }
-
-    );
-    chart.render(); //maybe comment this out???????? so it's not there? and is blank???
-
-  });
+				}
+				console.log(economy);
+			}),
 
 
-  //Updating per drop down
-  $('.dropdown-menu li > a').click(function(e) {
-    console.log(chart);
-    switch (this.innerHTML) {
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					family.push(parseFloat(JSON.stringify(data[i]["Family"])));
+				}
+				console.log(family);
 
-      case "Freedom":
-        //update graph with freedom data
-        break;
+			}),
 
-      case "GDP per Capita":
-        chart.options.title.text = "SAMPLE";
-        chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-              return {
-                x: elt,
-                y: economy[index]
-              }
-            });
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					freedom.push(parseFloat(JSON.stringify(data[i]["Freedom"])));
+				}
+				console.log(freedom);
+			}),
 
-        //UPDATE AXISES ETC.
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					generosity.push(parseFloat(JSON.stringify(data[i]["Generosity"])));
+				}
+				console.log(generosity);
+			}),
 
-        //update text - do this for all - with write ups [d3.select]
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					govtTrust.push(parseFloat(JSON.stringify(data[i]["Trust in Government"])));
+				}
+				console.log(generosity);
+			}),
 
-        chart.render();
+			d3.json(queryURL, function(data) {
+				for (i = 0; i < data.length; i++) {
+					lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy)"])));
+				}
+			})
+
+		]
+
+	).then(function(data) {
+		//sets up chart but does not display it til a drop down is selected
+		chart = new CanvasJS.Chart("scatter-view", {
+				animationEnabled: true,
+				title: {
+					text: "GDP Per Capita vs Happiness"
+				},
+				axisX: {
+					title: "Happiness"
+				},
+				axisY: {
+					title: "GDP Per Capita"
+				},
+
+				data: [
+
+					{
+						type: "scatter",
+						name: "Country",
+						showInLegend: true,
+						dataPoints: happinessScore.map(function(elt, index) {
+							return {
+								x: elt,
+								y: economy[index],
+								pointBorderColor: "#0000ff"
+							}
+						})
+						
+
+					}
+				]
+
+			}
+
+		);
+		//chart.render(); --> commented out so that this display is initially and purposefully left blank
+
+	});
 
 
-        break;
+	//Updating per drop down
+	$('.dropdown-menu li > a').click(function(e) {
+		console.log(chart);
+		switch (this.innerHTML) {
 
-      case "Family":
-        //update 
-        break;
+			case "Freedom":
+				//update chart
+				chart.options.title.text = "Freedom vs Happiness";
+				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
+					return {
+						x: elt,
+						y: freedom[index]
+					}
 
-      case "Life Expectancy":
-        //update 
-        break;
+				});
+				chart.options.axisY.title = "Freedom";
+				chart.render();
 
-      case "Generosity":
-        //update 
-        break;
+				//update text
+				//write-ups still needed
+				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				break;
 
-      case "Trust (Government Corruptions)":
-        //update 
-        break;
+			case "GDP per Capita":
+				//update chart
+				chart.options.title.text = "GDP Per Capita vs Happiness";
+				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
+					return {
+						x: elt,
+						y: economy[index]
+					}
 
-      default:
-      //basically nothing
-        //whatever is your whatever
-    }
+				});
+				chart.options.axisY.title = "GDP Per Capita";
+				chart.render();
+
+				//update text
+				//write-ups still needed
+				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				break;
+
+			case "Family":
+				//update chart
+				chart.options.title.text = "Family vs Happiness";
+				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
+					return {
+						x: elt,
+						y: family[index]
+					}
+
+				});
+				chart.options.axisY.title = "Family";
+				chart.render();
+
+				//update text
+				//write-ups still needed
+				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				break;
+
+			case "Life Expectancy":
+				//update chart
+				chart.options.title.text = "Life Expectancy vs Happiness";
+				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
+					return {
+						x: elt,
+						y: lifeExpectancy[index]
+					}
+
+				});
+				chart.options.axisY.title = "Life Expetancy";
+				chart.render();
+
+				//update text
+				//write-ups still needed
+				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				break;
+
+			case "Generosity":
+				//update chart
+				chart.options.title.text = "Generosity vs Happiness";
+				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
+					return {
+						x: elt,
+						y: generosity[index]
+					}
+
+				});
+				chart.options.axisY.title = "Generosity";
+				chart.render();
+
+				//update text
+				//write-ups still needed
+				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				break;
+
+			case "Trust (Government Corruptions)":
+				//update chart
+				chart.options.title.text = "Trust (Government Corruptions) vs Happiness";
+				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
+					return {
+						x: elt,
+						y: govtTrust[index]
+					}
+
+				});
+				chart.options.axisY.title = "Trust (Government Corruptions) vs Happiness";
+				chart.render();
+
+				//update text
+				//write-ups still needed
+				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				break;
+
+			default:
+				// do nothing
+		}
 
 
-  });
+	});
 
 }
-// dropdown.event(function(){
-
-// }
-// )
-
-
-
-// happyScore = getHappinessScore();
-// country = getCountry();
-// economy = getEconomy();
-
-
-//   var queryURL = "/api/2017";
-//   d3.json(queryURL, function(data) {
-
-//     var chart = new CanvasJS.Chart("scatter-view", {
-//         animationEnabled: true,
-//         title: {
-//           text: "GDP Per Capita vs Happiness"
-//         },
-//         axisX: {
-//           title: "Happiness"
-//         },
-//         axisY: {
-//           title: "GDP Per Capita"
-//         },
-
-//         data: [
-
-//           {
-//             type: "scatter",
-//             name: "Country",
-//             showInLegend: true,
-//             dataPoints: happyScore.map(function(elt, index) {
-//               return {
-//                 x: elt,
-//                 y: economy[index]
-//               }
-//             })
-
-//           }
-//         ]
-
-//       }
-
-
-
-//     );
-//     chart.render();
-//   });
-// }
