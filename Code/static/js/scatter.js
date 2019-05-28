@@ -71,7 +71,7 @@ window.onload = function getData() {
 
 			d3.json(queryURL, function(data) {
 				for (i = 0; i < data.length; i++) {
-					lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy)"])));
+					lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy"])));
 				}
 			})
 
@@ -137,7 +137,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				d3.select("#scatter-text").text("The extent to which Freedom contributed to the calculation of the Happiness Score.");
 				break;
 
 			case "GDP per Capita":
@@ -155,7 +155,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				d3.select("#scatter-text").text("The extent to which GDP contributes to the calculation of the Happiness Score.");
 				break;
 
 			case "Family":
@@ -173,7 +173,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				d3.select("#scatter-text").text("The extent to which Family contributes to the calculation of the Happiness Score.");
 				break;
 
 			case "Life Expectancy":
@@ -191,7 +191,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				d3.select("#scatter-text").text("The extent to which Life expectancy contributed to the calculation of the Happiness Score.");
 				break;
 
 			case "Generosity":
@@ -209,7 +209,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				d3.select("#scatter-text").text("The extent to which Generosity contributed to the calculation of the Happiness Score..");
 				break;
 
 			case "Trust (Government Corruptions)":
@@ -227,7 +227,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dictum orci. Duis molestie ipsum ut felis posuere, sed dictum eros sagittis. Nulla sodales sagittis est ut iaculis. Proin elementum egestas ligula vitae pharetra. Vivamus hendrerit id eros quis congue. Pellentesque pellentesque augue nec risus placerat efficitur. Sed sed dolor id velit finibus cursus. Nullam maximus urna urna, quis pharetra turpis tincidunt porta. Cras pellentesque, nulla at sodales sollicitudin, quam neque tincidunt lorem, in porta arcu massa scelerisque odio. Nam imperdiet rutrum ullamcorper. Maecenas sodales, justo eget commodo egestas, lectus dui pharetra massa, vel ornare purus sapien eu mi. Quisque congue tristique pharetra. Sed in massa in massa tempor efficitur.");
+				d3.select("#scatter-text").text("The extent to which Perception of Corruption contributes to Happiness Score.");
 				break;
 
 			default:
