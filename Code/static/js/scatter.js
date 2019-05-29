@@ -119,7 +119,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which Family contributes to the calculation of the Happiness Score.");
+				d3.select("#scatter-text").text("TLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tempus, est commodo tempus egestas, neque nulla lobortis nisi, at dignissim sapien massa quis neque. Integer elementum, tellus eu venenatis fringilla, augue lectus sagittis eros, ac suscipit lacus felis eu dui. Nullam a ligula ac odio sagittis vehicula at ut risus. Curabitur luctus libero sapien, quis lacinia libero eleifend hendrerit. Vivamus odio libero, pharetra ac velit id, pretium fermentum sem. Aenean volutpat vehicula ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec sagittis convallis mauris, sed viverra massa dapibus vel. Vivamus nec neque posuere, consectetur massa in, vestibulum elit. Aenean dapibus eros ante, vel consectetur nisl porttitor at. Curabitur quis augue vel lorem faucibus vulputate vitae nec est. Nam aliquet dolor lorem, bibendum porta libero vulputate vel. Sed sed turpis mauris. Quisque volutpat tempus nibh et mattis. Vestibulum a nibh feugiat felis facilisis interdum eget a purus.");
 				break;
 
 			case "Life Expectancy":
