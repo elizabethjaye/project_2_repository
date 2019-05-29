@@ -152,7 +152,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("TInterestingly, life expectancy and happiness have a less clear correlation in this chart versus others in this set. While there is an absolute trend of life expectancy increasing as happiness does, it is not a clear set. It gradually increases in both directions, but there are clear outliers in different directions. While Hong Kong and Singapore both have extremely high scores for life expectancy, their happiness scores do not necessarily reflect the same. Additionally, there are some countries with mid-range happiness scores that have extremely low life expectancy scores - such as Lesotho, Sierra Leone, Chad, and Angola.");
+				d3.select("#scatter-text").text("Interestingly, life expectancy and happiness have a less clear correlation in this chart versus others in this set. While there is an absolute trend of life expectancy increasing as happiness does, it is not a clear set. It gradually increases in both directions, but there are clear outliers in different directions. While Hong Kong and Singapore both have extremely high scores for life expectancy, their happiness scores do not necessarily reflect the same. Additionally, there are some countries with mid-range happiness scores that have extremely low life expectancy scores - such as Lesotho, Sierra Leone, Chad, and Angola.");
 				break;
 
 			case "Generosity":
