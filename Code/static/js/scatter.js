@@ -113,7 +113,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which Freedom contributed to the calculation of the Happiness Score.");
+				d3.select("#scatter-text").text("While one would imagine freedom and happiness have a correlation, the results are not so clear cut! There are some clear countries that have strong freedom and happiness scores, such as Finland and Sweden. However, countries such as Rwanda and Cambodia have relatively low scores considering where they rank freedom.");
 				break;
 
 			case "GDP per Capita":
@@ -126,7 +126,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which GDP contributes to the calculation of the Happiness Score.");
+				d3.select("#scatter-text").text("In this chart, we see a fairly clear correlation between GDP Per Capita and Happiness Scores. The higher the GDP Per Capita, generally the higher the Happiness Score. The trend line moves across from the bottom left to the top right, indicating that desired correlation even if this isn't enough to claim causation. While there are definitely outliers (see Qatar as a higher point and Somalia as a lower one, where the trends don't perfectly match), over-all this is true in Western countries in particular. The countries furthest to the right are all located in the Nordic region and hold the highest happiness scores.");
 				break;
 
 			case "Family":
@@ -139,7 +139,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which Family contributes to the calculation of the Happiness Score.");
+				d3.select("#scatter-text").text("In this chart, we see a fairly clear correlation between Family and Happiness Scores. Family scores universally increase with Happiness Scores, though not at a very strong slope. A higher happiness score with significant steps in that regard do not necessarily indicate such drastic increases in family scores. The highest concentration of high scores in both regards concentrate in Nordic countries predominately, with some exceptions such as Canada, Australia, and New Zealand.");
 				break;
 
 			case "Life Expectancy":
@@ -152,7 +152,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which Life expectancy contributed to the calculation of the Happiness Score.");
+				d3.select("#scatter-text").text("Interestingly, life expectancy and happiness have a less clear correlation in this chart versus others in this set. While there is an absolute trend of life expectancy increasing as happiness does, it is not a clear set. It gradually increases in both directions, but there are clear outliers in different directions. While Hong Kong and Singapore both have extremely high scores for life expectancy, their happiness scores do not necessarily reflect the same. Additionally, there are some countries with mid-range happiness scores that have extremely low life expectancy scores - such as Lesotho, Sierra Leone, Chad, and Angola.");
 				break;
 
 			case "Generosity":
@@ -165,7 +165,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which Generosity contributed to the calculation of the Happiness Score..");
+				d3.select("#scatter-text").text("This chart, showcasing the relationship between generosity and happiness has a noticeably different trend then others we've seen before. There are some mild correlations between generosity and happiness - those with the highest happiness scores do tend to have higher generosity scores. However, this is not a given and the concentration is not evenly distributed.");
 				break;
 
 			case "Trust (Government Corruptions)":
@@ -178,7 +178,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("The extent to which Perception of Corruption contributes to Happiness Score.");
+				d3.select("#scatter-text").text("This chart shows the relationship between trust (specifically in government corruptions) in regards to happiness. Interestingly, the countries with the lowest scores in terms of trust land directly in the middle of the happiness scores. Greece and Lithuania both have remarkably low trust scores, yet are solidly in the mid-range of happiness. Otherwise, scores are evenly distributed across the two metrics.");
 				break;
 
 			default:
