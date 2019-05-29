@@ -145,10 +145,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-  <script type="text/javascript" src="../static/js/config.js"></script>
-  <script type="text/javascript" src="../static/js/worldmap.js"></script>
+  <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/worldmap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/scatter.js') }}"></script>
+
+  <!-- <script type="text/javascript" src="../static/js/"></script>
+  <script type="text/javascript" src="../static/js/"></script>
   <script type="text/javascript" src="../static/js/app.js"></script>
-  <script type="text/javascript" src="../static/js/scatter.js"></script>
+  <script type="text/javascript" src="../static/js/"></script> -->
 </body>
   <!-- Footer -->
   <footer class="pt-3 footer bg-black">
