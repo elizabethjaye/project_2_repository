@@ -19,7 +19,7 @@ from flask_sqlalchemy import SQLAlchemy
 # Database Setup 10-3-10
 #################################################
 engine = create_engine("sqlite:///db.sqlite", connect_args={'check_same_thread': False}, echo=True)
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+
 # db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
@@ -39,7 +39,8 @@ session = Session(engine)
 # Flask Setup
 #################################################
 app = Flask(__name__)
-
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #################################################
 # Flask Routes
 #################################################
