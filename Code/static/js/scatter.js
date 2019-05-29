@@ -1,8 +1,6 @@
 //declare arrays
 
-var country = [],
-	happinessScore = [],
-	economy = [],
+var economy = [],
 	family = [],
 	freedom = [],
 	generosity = [],
@@ -19,61 +17,31 @@ window.onload = function getData() {
 		[
 			d3.json(queryURL, function(data) {
 				for (i = 0; i < data.length; i++) {
-					country.push(data[i]["Country"]);
-				}
-				console.log(country);
-			}),
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					happinessScore.push(parseFloat(data[i]["Happiness Score"]));
-
-				}
-				console.log(happinessScore);
-			}),
-
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					economy.push(parseFloat(data[i]["Economy"]));
-
+					var dat = {};
+					dat["name"] = data[i]["Country"];
+					dat["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat["y"] = parseFloat(data[i]["Economy"]);
+					economy.push(dat);
+					dat["y"] = parseFloat(data[i]["Family"]);
+					family.push(dat);
+					dat["y"] = parseFloat(data[i]["Freedom"]);
+					freedom.push(dat);
+					dat["y"] = parseFloat(data[i]["Generosity"]);
+					generosity.push(dat);
+					dat["y"] = parseFloat(data[i]["Trust in Government"]);
+					govtTrust.push(dat);
+					dat["y"] = parseFloat(data[i]["Health (Life Expectancy"]);
+					lifeExpectancy.push(dat);
+					
 				}
 				console.log(economy);
-			}),
-
-
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					family.push(parseFloat(JSON.stringify(data[i]["Family"])));
-				}
 				console.log(family);
-
-			}),
-
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					freedom.push(parseFloat(JSON.stringify(data[i]["Freedom"])));
-				}
 				console.log(freedom);
-			}),
-
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					generosity.push(parseFloat(JSON.stringify(data[i]["Generosity"])));
-				}
 				console.log(generosity);
+				console.log(govtTrust);
+				console.log(lifeExpectancy);
 			}),
 
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					govtTrust.push(parseFloat(JSON.stringify(data[i]["Trust in Government"])));
-				}
-				console.log(generosity);
-			}),
-
-			d3.json(queryURL, function(data) {
-				for (i = 0; i < data.length; i++) {
-					lifeExpectancy.push(parseFloat(JSON.stringify(data[i]["Health (Life Expectancy"])));
-				}
-			})
 
 		]
 
@@ -96,23 +64,16 @@ window.onload = function getData() {
 					{
 						type: "scatter",
 						name: "Country",
-						showInLegend: true,
-						dataPoints: happinessScore.map(function(elt, index) {
-							return {
-								x: elt,
-								y: economy[index],
-								pointBorderColor: "#0000ff"
-							}
-						})
+						showInLegend: false,
+						dataPoints: economy,
 						
-
 					}
 				]
 
 			}
 
 		);
-		//chart.render(); --> commented out so that this display is initially and purposefully left blank
+		// chart.render(); //--> commented out so that this display is initially and purposefully left blank
 
 	});
 
@@ -125,13 +86,8 @@ window.onload = function getData() {
 			case "Freedom":
 				//update chart
 				chart.options.title.text = "Freedom vs Happiness";
-				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-					return {
-						x: elt,
-						y: freedom[index]
-					}
-
-				});
+				chart.options.data[0].toolTipContent = "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b>Happiness Score:</b> {x}<br/><b>Freedom:</b></span> {y}";
+				chart.options.data[0].dataPoints = freedom;
 				chart.options.axisY.title = "Freedom";
 				chart.render();
 
@@ -143,13 +99,8 @@ window.onload = function getData() {
 			case "GDP per Capita":
 				//update chart
 				chart.options.title.text = "GDP Per Capita vs Happiness";
-				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-					return {
-						x: elt,
-						y: economy[index]
-					}
-
-				});
+				chart.options.data[0].toolTipContent = "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b>Happiness Score:</b> {x}<br/><b>GDP per Capita:</b></span> {y}";
+				chart.options.data[0].dataPoints = economy;
 				chart.options.axisY.title = "GDP Per Capita";
 				chart.render();
 
@@ -161,13 +112,8 @@ window.onload = function getData() {
 			case "Family":
 				//update chart
 				chart.options.title.text = "Family vs Happiness";
-				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-					return {
-						x: elt,
-						y: family[index]
-					}
-
-				});
+				chart.options.data[0].toolTipContent = "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b>Happiness Score:</b> {x}<br/><b>Family:</b></span> {y}";
+				chart.options.data[0].dataPoints = family;
 				chart.options.axisY.title = "Family";
 				chart.render();
 
@@ -179,13 +125,8 @@ window.onload = function getData() {
 			case "Life Expectancy":
 				//update chart
 				chart.options.title.text = "Life Expectancy vs Happiness";
-				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-					return {
-						x: elt,
-						y: lifeExpectancy[index]
-					}
-
-				});
+				chart.options.data[0].toolTipContent = "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b>Happiness Score:</b> {x}<br/><b>Life Expectancy:</b></span> {y}";
+				chart.options.data[0].dataPoints = lifeExpectancy;
 				chart.options.axisY.title = "Life Expetancy";
 				chart.render();
 
@@ -197,13 +138,8 @@ window.onload = function getData() {
 			case "Generosity":
 				//update chart
 				chart.options.title.text = "Generosity vs Happiness";
-				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-					return {
-						x: elt,
-						y: generosity[index]
-					}
-
-				});
+				chart.options.data[0].toolTipContent = "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b>Happiness Score:</b> {x}<br/><b>Generosity:</b></span> {y}";
+				chart.options.data[0].dataPoints = generosity;
 				chart.options.axisY.title = "Generosity";
 				chart.render();
 
@@ -215,14 +151,9 @@ window.onload = function getData() {
 			case "Trust (Government Corruptions)":
 				//update chart
 				chart.options.title.text = "Trust (Government Corruptions) vs Happiness";
-				chart.options.data[0].dataPoints = happinessScore.map(function(elt, index) {
-					return {
-						x: elt,
-						y: govtTrust[index]
-					}
-
-				});
-				chart.options.axisY.title = "Trust (Government Corruptions) vs Happiness";
+				chart.options.data[0].toolTipContent = "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b>Happiness Score:</b> {x}<br/><b>Trust in Governemnt:</b></span> {y}";
+				chart.options.data[0].dataPoints = govtTrust;
+				chart.options.axisY.title = "Trust (Government Corruptions)";
 				chart.render();
 
 				//update text

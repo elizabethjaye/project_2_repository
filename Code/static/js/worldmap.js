@@ -15,8 +15,9 @@ function perc2color(perc) {
 
 // Creating map object
 var map = L.map("heatmap", {
-  center: [40.7128, -74.0059],
-  zoom: 2
+  center: [10, 0],
+  zoom: 1.4,
+  minZoom: 1.4 
 });
 console.log(map);
 // Adding tile layer
