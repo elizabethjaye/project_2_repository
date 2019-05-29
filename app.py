@@ -8,6 +8,8 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
+import json
+
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
@@ -125,6 +127,15 @@ def countrySelection(country_sel):
 
     print(countryAPI)
     return jsonify(countryAPI)   
+
+@app.route("/api/worldpolygon")
+def world_polygons():
+
+    with open('static/Data/world_polygons.json', 'r') as json_file:  
+        data = json.load(json_file)
+        return jsonify(data)
+
+
 
 @app.errorhandler(404)
 def custom400(error):

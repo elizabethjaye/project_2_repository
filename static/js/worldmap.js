@@ -59,7 +59,7 @@ legend.addTo(map);
 // Grabbing our GeoJSON data..
 d3.json(`api/2017`, function (apidata) {
 
-  d3.json("static/Data/world_polygons.json", function (data) {
+  d3.json("api/worldpolygon", function (data) {
     
 //colors for the countries based on value
 
