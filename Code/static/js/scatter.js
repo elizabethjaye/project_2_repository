@@ -17,21 +17,41 @@ window.onload = function getData() {
 		[
 			d3.json(queryURL, function(data) {
 				for (i = 0; i < data.length; i++) {
-					var dat = {};
-					dat["name"] = data[i]["Country"];
-					dat["x"] = parseFloat(data[i]["Happiness Score"]);
-					dat["y"] = parseFloat(data[i]["Economy"]);
-					economy.push(dat);
-					dat["y"] = parseFloat(data[i]["Family"]);
-					family.push(dat);
-					dat["y"] = parseFloat(data[i]["Freedom"]);
-					freedom.push(dat);
-					dat["y"] = parseFloat(data[i]["Generosity"]);
-					generosity.push(dat);
-					dat["y"] = parseFloat(data[i]["Trust in Government"]);
-					govtTrust.push(dat);
-					dat["y"] = parseFloat(data[i]["Health (Life Expectancy"]);
-					lifeExpectancy.push(dat);
+					let dat1 = {},
+						dat2 = {},
+						dat3 = {},
+						dat4 = {},
+						dat5 = {},
+						dat6 = {};
+					dat1["name"] = data[i]["Country"];
+					dat1["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat1["y"] = parseFloat(data[i]["Economy"]);
+					economy.push(dat1);
+
+					dat2["name"] = data[i]["Country"];
+					dat2["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat2["y"] = parseFloat(data[i]["Family"]);
+					family.push(dat2);
+
+					dat3["name"] = data[i]["Country"];
+					dat3["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat3["y"] = parseFloat(data[i]["Freedom"]);
+					freedom.push(dat3);
+
+					dat4["name"] = data[i]["Country"];
+					dat4["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat4["y"] = parseFloat(data[i]["Generosity"]);
+					generosity.push(dat4);
+
+					dat5["name"] = data[i]["Country"];
+					dat5["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat5["y"] = parseFloat(data[i]["Trust in Government"]);
+					govtTrust.push(dat5);
+
+					dat6["name"] = data[i]["Country"];
+					dat6["x"] = parseFloat(data[i]["Happiness Score"]);
+					dat6["y"] = parseFloat(data[i]["Health (Life Expectancy"]);
+					lifeExpectancy.push(dat6);
 					
 				}
 				console.log(economy);
@@ -119,7 +139,7 @@ window.onload = function getData() {
 
 				//update text
 				//write-ups still needed
-				d3.select("#scatter-text").text("TLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tempus, est commodo tempus egestas, neque nulla lobortis nisi, at dignissim sapien massa quis neque. Integer elementum, tellus eu venenatis fringilla, augue lectus sagittis eros, ac suscipit lacus felis eu dui. Nullam a ligula ac odio sagittis vehicula at ut risus. Curabitur luctus libero sapien, quis lacinia libero eleifend hendrerit. Vivamus odio libero, pharetra ac velit id, pretium fermentum sem. Aenean volutpat vehicula ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec sagittis convallis mauris, sed viverra massa dapibus vel. Vivamus nec neque posuere, consectetur massa in, vestibulum elit. Aenean dapibus eros ante, vel consectetur nisl porttitor at. Curabitur quis augue vel lorem faucibus vulputate vitae nec est. Nam aliquet dolor lorem, bibendum porta libero vulputate vel. Sed sed turpis mauris. Quisque volutpat tempus nibh et mattis. Vestibulum a nibh feugiat felis facilisis interdum eget a purus.");
+				d3.select("#scatter-text").text("The extent to which Family contributes to the calculation of the Happiness Score.");
 				break;
 
 			case "Life Expectancy":
