@@ -110,7 +110,7 @@ d3.json(`api/2017`, function (apidata) {
     // Style each feature (in this case a neighborhood)
     style: function (feature) {
       // console.log(feature.properties.name);
-      let maxColor = countryColor(feature.properties.name);
+      // let maxColor = countryColor(feature.properties.name);
       // console.log(countryColor(feature.properties.name));
       // console.log(maxColor);
       return {
